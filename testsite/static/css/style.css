@@ -1,0 +1,11 @@
+body{
+    background-color: #fefefe;
+}
+h1 {
+    font-family: Tahoma, serif;
+    font-size: 14px;
+    color: orange;
+}
+.errorlist{
+color: red;
+}

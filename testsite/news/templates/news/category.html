@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block title %}
+{{ category.title }} :: {{ block.super}}
+{% endblock %}
+{% block sidebar %}
+{% include 'inc/_sidebar.html' %}
+{% endblock %}
+
+{% block content %}
+
+    {% for new in news reversed %}S
+    <div class="card text-left mb-3">
+        <div class="card-header">
+            {{ forloop.counter }}
+            Категория: {{ new.category }}
+        </div>
+        <div class="card-body">
+            <div class="media">
+                {% if new.photo %}
+                <img src="{{ new.photo.url }}" width = '350' height="200" class = 'mr-3'>
+                {% else %}
+                <img src="https://picsum.photos//id/1060/350/300/?blur=1" class = 'mr-3'>
+                {% endif %}
+                <div class="media-body">
+                    <h5 class="card-title {% cycle 'text-danger' 'text-success' %}">{{ new.title }}</h5>
+                    <!--                {% autoescape off %}-->
+                    <p class="card-text">{{ new.content| linebreaks |truncatewords:50}}</p>
+                    <!--                {% endautoescape %}-->
+                    <a href="{{ new.get_absolute_url }}" class="btn btn-primary">Read more...</a>
+                </div>
+            </div>
+
+        </div>
+        <div class="card-footer text-muted">
+            {{ new.created_at|date:"Y-m-d" }}
+        </div>
+    </div>
+    {% endfor %}
+{% endblock %}
